@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { SlideWork } from "./containers/SlideWork";
+import { BitcoinRates } from "./components/BitcoinRates";
 import "./App.css";
 
 const App = () => {
 
   //RETURN
   return (
-    <div className="main-app-container">Test</div>
+    <div className="main-app-container">
+      {/* <p>Test</p> */}
+      {/* <SlideWork /> */}
+      <BitcoinRates />
+    </div>
+
   );
 };
 export default App;
