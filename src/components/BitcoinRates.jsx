@@ -7,12 +7,17 @@ function BitcoinRates() {
     // fetch URL: https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}
     const [currencyValue, setCurrencyValue] = useState(0);
     useEffect(() => {
-        const currencyResponse = fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`);
-        currencyResponse.then((data) => {
-            data.json().then((content) => {
-                setCurrencyValue(content.bitcoin[currency.toLowerCase()])
+        try {
+            const currencyResponse = fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`);
+            currencyResponse.then((data) => {
+                data.json().then((content) => {
+                    setCurrencyValue(content.bitcoin[currency.toLowerCase()])
+                })
             })
-        })
+        }
+        catch {
+            console.log("Error fetching for currency: ", currency)
+        }
         // cleanup function - runs when unmounted or dependencies change
         return () => {
             console.log('cleanup effect');
@@ -28,7 +33,7 @@ function BitcoinRates() {
                     {options}
                 </select>
             </label>
-            <p>Value: {currencyValue}</p>
+            <p>1 Bitcoin is equals to: {currencyValue} {currency}</p>
         </div>
     )
 }
