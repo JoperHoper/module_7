@@ -1,16 +1,25 @@
 import { BitcoinRates } from "./components/BitcoinRates";
 import "./App.css";
 import { useState } from "react";
+import { SlideWork } from "./containers/SlideWork";
+import { CustomHooksExamples } from "./containers/CustomHooksExamples";
+import { LabTwo } from "./components/LabTwo";
 
 const App = () => {
   const [contentName, setContentName] = useState("Lab 1")
 
-  const contentConfig = [{ lab: "Lab 1" }, { lab: "Lab 2" }]
+  const contentConfig = [{ lab: "Slidework" }, { lab: "Lab 1" }, { lab: "Custom Hooks" }, { lab: "Lab 2" }]
 
   const displayHandler = () => {
     switch (contentName) {
       case contentConfig[0].lab:
+        return <SlideWork />;
+      case contentConfig[1].lab:
         return <BitcoinRates />;
+      case contentConfig[2].lab:
+        return <CustomHooksExamples />;
+      case contentConfig[3].lab:
+        return <LabTwo />;
       default:
         return (
           <div
