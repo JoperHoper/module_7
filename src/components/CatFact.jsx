@@ -9,14 +9,14 @@ export const CatFact = () => {
         `https://catfact.ninja/facts?max_length=${catFactLength}`
     );
     const dropdownListChangeHandler = (e) => {
-        console.log("dropdownListChangeHandler", e.target.value);
         setCatFactLength(e.target.value);
     };
     const displayCatFactHandler = () => {
         if (isLoading) {
             return <p>Loading...</p>;
         }
-        return data?.data.map((fact, index) => <p key={index}>{fact.fact}</p>);
+        console.log(data.data.data)
+        return data?.data?.data?.map((fact, index) => <p key={index}>{fact.fact}</p>);
     };
     return (
         <div className="CatFact componentBox">

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useEmojiContext } from "../context/EmojiContext";
 
 const currencies = ['USD', 'AUD', 'NZD', 'GBP', 'EUR', 'SGD'];
 function BitcoinRates() {
     const [currency, setCurrency] = useState(currencies[0]);
     // fetch URL: https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}
     const [currencyValue, setCurrencyValue] = useState(0);
+    const { emoji, handleUpdateEmoji, changeMood } = useEmojiContext();
+
     useEffect(() => {
         try {
             const currencyResponse = fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`);
@@ -33,6 +36,8 @@ function BitcoinRates() {
                 </select>
             </label>
             <p>1 Bitcoin is equals to: {currencyValue} {currency}</p>
+            <p>{emoji}</p>
+            <button onClick={() => changeMood()}>Update Mood</button>
         </div>
     )
 }

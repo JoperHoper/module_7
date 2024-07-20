@@ -1,6 +1,8 @@
 import ClockDisplay from "../components/ClockDisplay"
 import { useState, useEffect, useRef, useReducer } from "react";
+import { useUserContext } from "../context/UserContext";
 import axios from "axios";
+import { ssrImportKey } from "vite/runtime";
 
 export const SlideWork = () => {
 
@@ -12,6 +14,7 @@ export const SlideWork = () => {
                 <NameComponent name={"Andy"} />
             </div>
             <div style={{ border: "solid blue 1px", padding: "10px", margin: "10px" }}>
+                <p>Reducer Example</p>
                 <ReducerExample />
             </div>
             <div style={{ border: "solid blue 1px", padding: "10px", margin: "10px" }}>
@@ -38,6 +41,7 @@ const NameComponent = ({ name }) => {
 }
 
 const ReducerExample = () => {
+    const { currentUser, handleUpdateUser } = useUserContext();
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -79,9 +83,8 @@ const ReducerExample = () => {
 
     return (
         <div>
-            <ul>
-                {MoviesDisplayHandler()}
-            </ul>
+            <p>{currentUser.name}</p>
+            <ul>{MoviesDisplayHandler()}</ul>
             <button onClick={addMovie}>Add</button>
             <button onClick={deleteMovie}>Delete</button>
         </div>

@@ -45,8 +45,6 @@ export const getDataReducerActions = {
 }
 
 export function getDataReducer(state, action) {
-    // TELL ME WHAT ACTION IS FIRED
-    console.log("Action is fired: ", action.type, action.payload);
 
     switch (action.type) {
         case getDataReducerActions.FETCH_SUCCESS:
