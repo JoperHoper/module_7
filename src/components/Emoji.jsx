@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useContext } from "react"
 import { useEmojiContext } from "../context/EmojiContext"
 
 export const EmojiContainer = () => {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useData } from "../hooks/useData";
+import { ContextStatus } from "./ContextStatus"
 
 export const LabTwo = () => {
     const currencies = ['USD', 'AUD', 'NZD', 'GBP', 'EUR', 'SGD'];
@@ -18,6 +19,7 @@ export const LabTwo = () => {
         const options = currencies.map(curr => <option value={curr} key={curr}>{curr}</option>);
         return (
             <div className="BitcoinRates componentBox">
+                <ContextStatus />
                 <h3>Bitcoin Exchange Rate</h3>
                 <label>Choose currency:
                     <select value={currency} onChange={(e) => {

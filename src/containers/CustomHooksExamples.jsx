@@ -1,6 +1,7 @@
 import { HobbyForm } from "../components/HobbyForm";
 import { SubscribeForm } from "../components/SubscribeForm"
 import { CatFact } from "../components/CatFact"
+import { ContextStatus } from "../components/ContextStatus";
 
 export const CustomHooksExamples = () => {
     // state var
@@ -15,6 +16,7 @@ export const CustomHooksExamples = () => {
                 width: "100%",
             }}
         >
+            <ContextStatus />
             <h4>Custom Hook Examples</h4>
             <ExampleDecorator>
                 <div>

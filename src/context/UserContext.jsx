@@ -1,5 +1,20 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 
+const userReducer = (state, action) => {
+    switch (action.type) {
+        case "UPDATE_USER":
+            return { ...state, currentUser: action.payload };
+        case "TOGGLE_MODE":
+            return { ...state, mode: state.mode === "light" ? "dark" : "light" }
+        default:
+            return state;
+    }
+}
+
+const intitalState = {
+    currentUser: { name: "Guest" },
+    mode: "light"
+}
 // 1. Create the context
 const UserContext = createContext();
 // Custom provider component for this context.
@@ -7,22 +22,21 @@ const UserContext = createContext();
 
 export const UserProvider = (props) => {
     // store the current user in state at the top level
-    const [currentUser, setCurrentUser] = useState({ name: "Guest" });
-    const [mode, setMode] = useState("Light");
+    const [state, dispatch] = useReducer(userReducer, intitalState);
 
     const toggleMode = () => {
-        setMode(mode === "light" ? "dark" : "light")
+        dispatch({ type: "TOGGLE_MODE" });
     }
     // sets user object in state, shared via context
     const handleUpdateUser = (user) => {
-        setCurrentUser(user);
+        dispatch({ type: "UPDATE_USER", payload: user });
     }
     // 2. Provide the context.
     // The Provider component of any context (UserContext.Provider)
     // sends data via its value prop to all children at every level.
     // We are sending both the current user and an update function
     return (
-        <UserContext.Provider value={{ currentUser, handleUpdateUser, mode, toggleMode }}>
+        <UserContext.Provider value={{ ...state, handleUpdateUser, toggleMode }}>
             {props.children}
         </UserContext.Provider>
     );

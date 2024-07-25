@@ -1,24 +1,32 @@
-import { useContext } from "react"
+import { ContextStatus } from "../components/ContextStatus";
 import { useUserContext } from "../context/UserContext"
-import { LoginForm } from "../components/formExample";
 
 export const ContextWork = () => {
-    const { currentUser, handleUpdateUser, mode } = useUserContext();
+    const { currentUser, handleUpdateUser, mode, toggleMode } = useUserContext();
+    const handleNameChange = (e) => {
+        handleUpdateUser({ name: e.target.value })
+    }
 
     return (
-        <div
-            style={{
-                border: "solid blue 1px",
-                padding: "10px",
-                margin: "10px",
-                flexDirection: "column",
-                backgroundColor: mode === "dark" ? "black" : "lightgrey",
-                color: mode === "dark" ? "white" : "black"
-            }}
-        >
-            <p>SLIDE NAME</p>
-            {currentUser.name}
-            <button onClick={() => handleUpdateUser({ name: "Josephine" })}>Update User</button>
+        <div>
+            <ContextStatus />
+            <div
+                style={{
+                    border: "solid blue 1px",
+                    padding: "10px",
+                    margin: "10px",
+                    flexDirection: "column",
+                    backgroundColor: mode === "dark" ? "black" : "lightgrey",
+                    color: mode === "dark" ? "white" : "black"
+                }}
+            >
+
+                <p>SLIDE NAME</p>
+                <div>
+                    <input value={currentUser.name} onChange={handleNameChange} />
+                    <button onClick={toggleMode}>{mode}mode</button>
+                </div>
+            </div>
         </div>
     )
 }

@@ -2,12 +2,15 @@ import ClockDisplay from "../components/ClockDisplay"
 import { useState, useEffect, useRef, useReducer } from "react";
 import { useUserContext } from "../context/UserContext";
 import axios from "axios";
-import { ssrImportKey } from "vite/runtime";
+import { ContextStatus } from "../components/ContextStatus";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export const SlideWork = () => {
 
     return (
         <div>
+            <h1>Slide Work</h1>
+            <ContextStatus />
             <div
                 style={{ border: "solid blue 1px", padding: "10px", margin: "10px" }}
             >
@@ -24,8 +27,9 @@ export const SlideWork = () => {
     );
 };
 
-const NameComponent = ({ name }) => {
-
+export const NameComponent = () => {
+    const { name } = useParams();
+    const [searchParam] = useSearchParams();
     const nameRef = useRef();
 
     useEffect(() => {
@@ -36,11 +40,11 @@ const NameComponent = ({ name }) => {
     }, [])
 
     return (
-        <div ref={nameRef}>{name}</div>
+        <div ref={nameRef}>{name || searchParam.get("variantName")}</div>
     )
 }
 
-const ReducerExample = () => {
+export const ReducerExample = () => {
     const { currentUser, handleUpdateUser } = useUserContext();
 
     const reducer = (state, action) => {
@@ -91,7 +95,7 @@ const ReducerExample = () => {
     )
 }
 
-const PostListReducer = () => {
+export const PostListReducer = () => {
     const [postsResult, dispatch] = useReducer(reducer, { // initial state for postsResult state variable
         loading: true, // true when loading and no data in posts
         posts: [], // empty until data is fetched
