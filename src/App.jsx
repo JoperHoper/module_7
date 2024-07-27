@@ -9,11 +9,14 @@ import { CustomHooksExamples } from "./containers/CustomHooksExamples"
 import { LabTwo } from "./components/LabTwo";
 import { LabThree } from "./components/LabThree";
 import { ContextWork } from "./containers/ContextWork";
+import { NavBar } from "./components/NavBar";
+
 
 const App = () => {
   return (
     <UserProvider>
       <EmojiProvider>
+        <NavBar />
         <Routes>
           <Route index element={<WelcomePage />} />
           <Route path="lab-one" element={<BitcoinRates />} />
