@@ -1,10 +1,21 @@
+import { useState } from "react";
 import { ContextStatus } from "../components/ContextStatus";
 import { useUserContext } from "../context/UserContext"
 
 export const ContextWork = () => {
     const { currentUser, handleUpdateUser, mode, toggleMode } = useUserContext();
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+
     const handleNameChange = (e) => {
-        handleUpdateUser({ name: e.target.value })
+        setName(e.target.value);
+    }
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    }
+    const handleSubmit = () => {
+        handleUpdateUser({ name: name, email: email })
     }
 
     return (
@@ -23,8 +34,10 @@ export const ContextWork = () => {
 
                 <p>SLIDE NAME</p>
                 <div>
-                    <input value={currentUser.name} onChange={handleNameChange} />
+                    Name: <input value={name} onChange={handleNameChange} />
+                    Email: <input type="email" value={email} onChange={handleEmailChange} />
                     <button onClick={toggleMode}>{mode}mode</button>
+                    <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>

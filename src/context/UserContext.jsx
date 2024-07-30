@@ -12,7 +12,7 @@ const userReducer = (state, action) => {
 }
 
 const intitalState = {
-    currentUser: { name: "Guest" },
+    currentUser: { name: "Guest", email: "" },
     mode: "light"
 }
 // 1. Create the context

@@ -10,6 +10,7 @@ import { LabTwo } from "./components/LabTwo";
 import { LabThree } from "./components/LabThree";
 import { ContextWork } from "./containers/ContextWork";
 import { NavBar } from "./components/NavBar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 const App = () => {
@@ -18,8 +19,12 @@ const App = () => {
       <EmojiProvider>
         <NavBar />
         <Routes>
+          <Route path="lab-one" element={
+            <ProtectedRoute>
+              <BitcoinRates />
+            </ProtectedRoute>
+          } />
           <Route index element={<WelcomePage />} />
-          <Route path="lab-one" element={<BitcoinRates />} />
           <Route path="slidework">
             <Route index element={<SlideWork />} />
             <Route path="name-ref/:name" element={<NameComponent />} />
